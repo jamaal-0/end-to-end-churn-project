@@ -38,22 +38,27 @@ Architecture
 
 Technologies Used
 
-	Programming
+Programming
+	
 		•	Python 3.13
 	
-	Machine Learning
+Machine Learning
+
 		•	Scikit-learn
 		•	NumPy
 		•	Pandas
 	
-	Models (Experimented)
+Models (Experimented)
+
 		•	Ensemble tree-based classifiers
 	
-	Deployment
+Deployment
+
 		•	FastAPI
 		•	Uvicorn
 	
-	Database
+Database
+
 		•	PostgreSQL
 		•	psycopg2 driver
 
@@ -62,12 +67,14 @@ Technologies Used
 Dataset
 
 The project uses customer behavioural features including:
+
 	•	Demographic attributes
 	•	Service usage information
 	•	Account contract information
 	•	Billing preferences
 
 Target variable:
+
 	•	Churn classification (Yes / No)
 
 ⸻
@@ -77,11 +84,13 @@ Data Processing Pipeline
 The preprocessing pipeline is implemented using ColumnTransformer and includes:
 
 Numeric Feature Processing
+
 	•	Missing value imputation
 	•	Yeo-Johnson power transformation for skew reduction
 	•	Feature scaling
 
 Categorical Feature Processing
+
 	•	Most-frequent imputation
 	•	One-hot encoding with unknown category handling
 
@@ -92,6 +101,7 @@ Model Training Strategy
 Multiple classification models were evaluated.
 
 The optimal model was selected using:
+
 	•	Validation performance
 	•	F1-score optimization
 	•	Threshold calibration
@@ -105,10 +115,12 @@ Production Inference System
 The project implements a RESTful inference API using FastAPI.
 
 Endpoints include:
+
 	•	Single prediction inference
 	•	Batch prediction inference
 
 The inference pipeline loads serialized artifacts:
+
 	•	Trained model
 	•	Preprocessing transformer
 	•	Prediction threshold
@@ -120,6 +132,7 @@ Database Logging System
 Prediction results are automatically stored in PostgreSQL.
 
 Logged information includes:
+
 	•	Prediction probability
 	•	Binary churn decision
 	•	Model identifier
@@ -134,6 +147,7 @@ API Endpoints
 POST /predict_single
 
 Accepts customer feature JSON input and returns:
+
 	•	Churn decision
 	•	Prediction probability
 	•	Model name
@@ -143,6 +157,7 @@ Accepts customer feature JSON input and returns:
 POST /predict_batch
 
 Accepts batch feature arrays and returns:
+
 	•	Batch churn predictions
 	•	Probability scores
 
@@ -153,6 +168,7 @@ All predictions are persisted in database storage.
 System Design Principles
 
 The project follows production-style ML design considerations:
+
 	•	Separation of training and inference pipelines
 	•	Artifact-based model serving
 	•	Explicit threshold decisioning
@@ -164,6 +180,7 @@ The project follows production-style ML design considerations:
 Future Work
 
 Planned extensions include:
+
 	•	Dashboard visualization integration (Power BI / Tableau)
 	•	Model drift monitoring
 	•	Asynchronous prediction logging
@@ -173,6 +190,7 @@ Planned extensions include:
 ⸻
 
 Key Contributions of This Project
+
 	•	End-to-end machine learning lifecycle implementation
 	•	Deployment-ready inference API
 	•	Database-backed prediction tracking
