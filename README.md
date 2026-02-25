@@ -5,17 +5,12 @@ This project is an end-to-end applied machine learning system designed to predic
 
 The system covers the full ML lifecycle including:
 
-• Data ingestion and preprocessing
-
-• Exploratory data analysis (EDA)
-
-• Model training and evaluation
-
-• Pipeline serialization
-
-• Production inference serving
-
-•	Database prediction logging
+	•	Data ingestion and preprocessing
+	•	Exploratory data analysis (EDA)
+	•	Model training and evaluation
+	•	Pipeline serialization
+	•	Production inference serving
+	•	Database prediction logging
 
 The project demonstrates practical deployment-oriented machine learning engineering.
 
