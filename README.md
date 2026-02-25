@@ -38,24 +38,24 @@ Architecture
 
 Technologies Used
 
-Programming
-	•	Python 3.13
-
-Machine Learning
-	•	Scikit-learn
-	•	NumPy
-	•	Pandas
-
-Models (Experimented)
-	•	Ensemble tree-based classifiers
-
-Deployment
-	•	FastAPI
-	•	Uvicorn
-
-Database
-	•	PostgreSQL
-	•	psycopg2 driver
+	Programming
+		•	Python 3.13
+	
+	Machine Learning
+		•	Scikit-learn
+		•	NumPy
+		•	Pandas
+	
+	Models (Experimented)
+		•	Ensemble tree-based classifiers
+	
+	Deployment
+		•	FastAPI
+		•	Uvicorn
+	
+	Database
+		•	PostgreSQL
+		•	psycopg2 driver
 
 ⸻
 
