@@ -24,19 +24,19 @@ The project demonstrates practical deployment-oriented machine learning engineer
 Architecture
 
 	Raw Dataset
-	↓
+		↓
 	Data Cleaning & Feature Engineering
-	↓
+		↓
 	Exploratory Data Analysis (EDA)
-	↓
+		↓
 	Model Training & Validation
-	↓
+		↓
 	Pipeline Serialization (Model + Preprocessor)
-	↓
+		↓
 	FastAPI Inference Service
-	↓
+		↓
 	Prediction Logging
-	↓
+		↓
 	PostgreSQL Storage
 
 ⸻
