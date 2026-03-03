@@ -1,0 +1,53 @@
+1. Module / Import Issues
+	•	Issue: Running the pipeline script caused ModuleNotFoundError or relative import errors.
+	•	Cause: Python couldn’t resolve relative imports unless the parent package is recognized.
+	•	Solution: Run the module with -m from the project root and optionally add __init__.py files in packages.
+
+⸻
+
+2. CSV File Not Found
+	•	Issue: FileNotFoundError for the CSV.
+	•	Cause: The code was looking for the CSV in the wrong directory.
+	•	Solution: Provide the correct path or ensure the working directory matches where the CSV exists.
+
+⸻
+
+3. Dropping the Target Column
+	•	Issue: KeyError: target column not found when dropping it.
+	•	Cause: Column names had extra spaces or formatting issues.
+	•	Solution: Strip whitespace from columns before dropping the target.
+
+⸻
+
+4. Concatenation of Features and Target
+	•	Issue: ValueError when concatenating features and target.
+	•	Cause: Target was 1D while features were 2D, and one-hot encoding produced a sparse matrix by default.
+	•	Solution: Make the target 2D, set OneHotEncoder to produce dense arrays, then concatenate.
+
+⸻
+
+5. TotalCharges Column Wrong dtype
+	•	Issue: TotalCharges was read as object instead of float.
+	•	Cause: CSV had empty strings or non-numeric entries.
+	•	Solution: Convert the column to numeric and handle non-numeric entries.
+
+⸻
+
+6. Target Column Encoding
+	•	Issue: Churn was categorical (Yes/No) but ML models require numeric targets.
+	•	Solution: Map target categories to numeric values; imputation is not needed for the target.
+
+⸻
+
+7. Sparse vs Dense in Pipelines
+	•	Issue: One-hot encoded categorical features caused errors during concatenation.
+	•	Cause: OneHotEncoder default output is a sparse matrix.
+	•	Solution: Use sparse=False or convert the sparse matrix to dense before concatenation.
+
+⸻
+
+Additional Notes
+	•	Split numeric and categorical columns after fixing dtypes.
+	•	Drop or handle duplicates before preprocessing.
+	•	Apply preprocessing only on features, not the target column.
+	•	After preprocessing, ensure all arrays (features + target) are 2D and dense.

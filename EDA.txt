@@ -1,0 +1,67 @@
+eda and feature engineering
+
+Phase 1.
+eda is about exploring the data and informing myself on what data needs what transformations
+this is done by first understanding what i am working with by answering questions such as:
+
+☐ What is the prediction target?
+☐ How many rows and columns?
+☐ What are feature data types?
+☐ What does each feature represent?
+☐ Remove duplicate rows if present.
+
+commands:
+df.shape
+df.info()
+df.head()
+df.describe()
+df.duplicated().sum()
+
+Phase 2.
+then next step is to inspect whether the data is missing values or not, and to either drop, impute, or leave as is.
+
+commands:
+df.isnull().sum()
+
+
+Phase 3.
+next i must inspect the distrobution of the data in the numerical features, asking myself questions such as:
+☐ Are values realistic?
+☐ Is data skewed?
+☐ Are extreme values present?
+☐ Do ranges differ widely?
+
+after checking the distrobution of the data if there were extreme values or there were large ranges, those outliers must be insepcted.
+typical questions to answer:
+☐ Are outliers data errors or real observations?
+☐ Do they dominate feature range?
+
+Use:
+	•	IQR method
+	•	z-score
+	•	boxplots
+
+Decision:
+	•	Remove
+	•	Clip
+	•	Transform
+	•	Keep
+
+Phase 4.
+next i must inspect the target column, in order to understand prediction difficulty.
+
+Classification:
+☐ Class imbalance?
+
+Regression:
+☐ Target skew?
+☐ Extreme values?
+
+Phase 5.
+the final part of EDA is to detect redundancy in the current features, answering questions like if there is:
+☐ Highly correlated features?
+☐ Obviously useless features?
+☐ Leakage features present?
+
+command:
+df.corr()

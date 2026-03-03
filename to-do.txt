@@ -1,0 +1,40 @@
+Flagship Project to-do list:
+
+
+	1.	Add EDA
+	2.  Create domain specific feature engineering 
+    3.  Remove linear and add logistic for models 
+    4.  change performance metrics to f1, accuracy etc 
+
+    5.  Put raw data into a simple database (Postgres/SQLite)
+    6.  Rewrite data ingestion using SQL queries
+    7.  Save model + preprocessor to S3
+    
+    8.  Create FastAPI endpoint using AWS EC2 or Lambda
+    9.  Export predictions to Power BI and build dashboard
+
+Friday 6th:
+Validate output 
+Export preprocessor object and model so it doesn’t need to be retrained 
+Create fastAPI endpoint to do predictions on new data and export data from models
+
+*learn the domain specific SQL
+Put raw data into a simple database (Postgres/SQLite)
+Rewrite data ingestion using SQL queries
+
+saturday 7th:
+Send the model and preprocessor to the cloud 
+*figure out how to do the monitoring and optimisations for models that have been hosted 
+*learn powerBI for data science 
+Export predictions to Power BI and build dashboard
+
+sunday 8th:
+review knowledge and learn the why and how of the decisions made in this project 
+write it all down in a text file so that i retain the knowledge
+
+monday 9th:
+update CV and say that this was done from november - janruary 
+
+tuesday 10th:
+do this project again on a new dataset (unstructired).
+Deadline:: 28th February 
