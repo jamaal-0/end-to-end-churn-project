@@ -1,7 +1,6 @@
 import pickle
-import numpy as np 
 import pandas as pd 
-from .pydanticModels import featureColumns, modelMetadata
+from .pydanticModels import featureColumns
 from typing import List
 
 def toDataFrame(data: featureColumns | List[featureColumns]) -> pd.DataFrame:

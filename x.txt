@@ -1,2 +1,0 @@
-#uvicorn api.backend:app --reload
-#python -m components.pipeline  

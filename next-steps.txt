@@ -1,6 +1,0 @@
-#find a way for the saved preprocessor object to include the EDA or save the EDA to its own .pkl file as well
-#save the objects to .pkl files 
-#test the saved model against baseline and random
-#create synthetic data 
-#write front-end
-#display model capabilities using tableau or powerBI

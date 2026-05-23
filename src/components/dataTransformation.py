@@ -1,139 +1,58 @@
-import numpy as np
-import pandas as pd
-
 from sklearn.compose import ColumnTransformer
-from sklearn.impute import SimpleImputer
+from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import (
     OneHotEncoder,
     PowerTransformer,
-    RobustScaler,
     StandardScaler
 )
 
 
 class dataTransformation:
 
-    def __init__(self, targetColumn: str):
-        self.targetColumn = targetColumn
+    def __init__(self):
+        pass
 
-    # ------------------------------
-    # Preprocessor Builder
-    # ------------------------------
-    def preprocess(self, numericColumns, catColumns):
+   
+    def build_preprocessor(self, df_copy):
+        df_copy_num = df_copy.select_dtypes(include=['number']).columns.tolist()
+        print(df_copy_num)
+        df_copy_cat = df_copy.select_dtypes(include=['str']).columns.tolist()
+        print(df_copy_cat)
 
-        transformers = []
 
-        # ---- Numeric pipelines ----
+        transformer = []
 
-        
-        if numericColumns:
-            skewedNumericPipeline = Pipeline([
-                ("imputer", SimpleImputer(strategy="median")),
-                ("power", PowerTransformer(method="yeo-johnson")),
-                ("scaler", StandardScaler())
+        #numeric columns
+        #scale with simple scaler and transform with yeo-johnson
+        if df_copy_num:
+            numeric_pipeline = Pipeline([
+                ('power', PowerTransformer(method='yeo-johnson')),
+                ('scaler', StandardScaler())
             ])
 
-            transformers.append(
-                ("num_skewed", skewedNumericPipeline, numericColumns)
-            )
-
-        # ---- Categorical pipelines ----
-
-        if catColumns:
-            normalCatPipeline = Pipeline([
-                ("imputer", SimpleImputer(strategy="most_frequent")),
-                ("encoder", OneHotEncoder(
-                    handle_unknown="ignore",
-                    sparse_output=False
-                ))
+            transformer.append(('numeric', numeric_pipeline, df_copy_num))
+        
+        #categorcial columns
+        #use one hot encodiing 
+        if df_copy_cat:
+            categorical_pipeline = Pipeline([
+                ('encoder', OneHotEncoder())
             ])
 
-            transformers.append(
-                ("cat_normal", normalCatPipeline, catColumns)
-            )
+            transformer.append(("categorical", categorical_pipeline, df_copy_cat))
 
-        
+    
+        return ColumnTransformer(transformer)
 
-        return ColumnTransformer(transformers)
+    
+    def transformData(self, df):
 
-    # ------------------------------
-    # Data Transformation Pipeline
-    # ------------------------------
-    def transformData(self, trainPath, testPath, schema):
+        X = df.drop('Churn', axis=1)
+        y = df['Churn']
 
-        train_df = pd.read_csv(trainPath)
-        test_df = pd.read_csv(testPath)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
 
-        train_df = train_df.copy()
-        test_df = test_df.copy()
-
-        #train_df['TotalCharges'] = pd.to_numeric(train_df['TotalCharges'], errors='coerce')
-        #test_df['TotalCharges'] = pd.to_numeric(test_df['TotalCharges'], errors='coerce')
-
-
-        
-
-        # ---- Schema unpack ----
-        print(test_df.shape)
-
-        drop_columns = schema["drop_columns"]
-
-        numericColumns = (
-            schema["skewedNumericCols"] +
-            schema["normalNumericCols"] +
-            schema["outliersNumericCols"] +
-            schema["skew_outlier_cols"]
-        )
-
-        catColumns = (
-            schema["normalCategoricalCols"] +
-            schema["imbalancedcategoricalCols"]
-        )
-
-
-        # ---- Separate target ----
-
-        y_train = train_df[self.targetColumn].map({'No': 0, 'Yes': 1}).astype(int).values
-        y_test = test_df[self.targetColumn].map({'No': 0, 'Yes': 1}).astype(int).values
-
-        train_df = train_df.drop(columns=[self.targetColumn], errors="ignore")
-        test_df = test_df.drop(columns=[self.targetColumn], errors="ignore")
-
-        # ---- Drop schema columns ----
-        print(drop_columns)
-
-        train_df = train_df.drop(columns=drop_columns, errors="ignore")
-        test_df = test_df.drop(columns=drop_columns, errors="ignore")
-        print(train_df.columns)
-
-        # ---- Numeric coercion ----
-
-        for df in [train_df, test_df]:
-            if "TotalCharges" in df.columns:
-                df["TotalCharges"] = pd.to_numeric(
-                    df["TotalCharges"],
-                    errors="coerce"
-                )
-
-        # ---- Build pipeline ----
-
-        preprocessor = self.preprocess(
-            numericColumns,
-            catColumns
-        )
-
-        # ---- Fit transform training data ----
-
-        X_train = preprocessor.fit_transform(train_df)
-        X_test = preprocessor.transform(test_df)
-
-        # ---- Ensure numpy array safety ----
-
-        X_train = np.atleast_2d(X_train)
-        X_test = np.atleast_2d(X_test)
-
-        print(X_train, '\n',y_train, '\n',X_test, '\n',y_test,'\n', end='\n')
-        
-
-        return X_train, y_train, X_test, y_test, preprocessor
+        preprocessor = self.build_preprocessor(X_train)
+    
+        return X_train, X_test, y_train, y_test, preprocessor

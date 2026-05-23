@@ -22,11 +22,4 @@ class featureColumns(BaseModel):
     TotalCharges:float
     
 
-class predictionData(BaseModel):
-    Churn: bool
-    probability: int
-
-class modelMetadata(BaseModel):
-    model: str
-    metric : str
 
