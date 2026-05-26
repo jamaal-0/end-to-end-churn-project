@@ -1,8 +1,6 @@
-# Virtual environment
+# OS
 
-venv/
-
-.env
+.DS_Store
 
 # Python cache
 
@@ -10,15 +8,15 @@ __pycache__/
 
 *.pyc
 
-*.log
+# Environments
 
-# OS files
+venv/
 
-.DS_Store
+.env
 
-# ML artifacts
+# Models / artifacts
 
-models/
+artifacts/
 
 *.pkl
 
@@ -27,11 +25,3 @@ models/
 # Logs
 
 *.log
-
-# Database configs (IMPORTANT if you used PostgreSQL locally)
-
-*.db
-
-*.sqlite
-
-.env
